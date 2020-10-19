@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 
 import { authenticateUser, getCurrentUserProfile, getUserEmails, getAllEmailAttachments, loadGAPI } from './api/google';
+import { downloadFile } from './api/download';
 
 import './styles/App.css';
 
@@ -35,7 +36,6 @@ class App extends PureComponent<Props, State> {
       this.setState({ errorMessage: error, loading: false })
     }
   }
-
   handleGmailButtonClick = () => {
     authenticateUser();
   }
@@ -46,6 +46,7 @@ class App extends PureComponent<Props, State> {
       const { emails } = await getUserEmails(queryString);
       const attachments = await getAllEmailAttachments(emails);
       console.log('attachments: ', attachments);
+      await downloadFile('sample', 'pdf', attachments[8][0].data);
     } catch (error) {
       this.setState({ errorMessage: error, loading: false })
     }
