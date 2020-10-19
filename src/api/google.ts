@@ -64,12 +64,12 @@ export async function authenticateUser() {
 }
 
 async function getEmailAttachment(messagedId: string, attachmentId: string) {
-  const { result } = await window.gapi.client.gmail.users.messages.attachments.get({
-    userId: 'me',
-    messageId: messagedId,
+  const response = await window.gapi.client.gmail.users.messages.attachments.get({
     id: attachmentId,
+    messageId: messagedId,
+    userId: 'me',
   });
-  return result;
+  return response;
 }
 
 async function getEmailAttachments(email: IGoogleEmail) {
