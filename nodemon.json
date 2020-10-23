@@ -15,5 +15,5 @@
     "NODE_ENV": "development"
   },
   "ext": "ts",
-  "exec": "concurrently \"npm run start:server\" \"npm run start:client\""
+  "exec": "concurrently \"yarn run build:server\" \"wait-on -l build/server/server.js\" \"yarn run start:server\" \"yarn run start:client\""
 }

@@ -2,7 +2,6 @@
   "name": "email-attachment-downloader-client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -12,7 +11,10 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "dotenv": "^8.2.0",
+    "dotenv-cli": "^4.0.0",
     "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.6",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-scripts": "3.4.3",
@@ -20,13 +22,13 @@
   },
   "scripts": {
     "clean": "rm -rf build",
-    "start:client": "wait-on -l tcp:3000 && react-scripts start",
+    "start:client": "dotenv -- bash -c 'wait-on -l tcp:$API_PORT' && react-scripts start",
     "build:client": "react-scripts build",
     "eject:client": "react-scripts eject",
     "test:client": "react-scripts test",
     "build:server": "babel src/server --out-dir build/server --extensions \".ts\" --source-maps inline",
     "start:server": "node build/server/server.js",
-    "start:dev": "yarn run clean && yarn run build:server && wait-on -l build/server/server.js && nodemon",
+    "start:dev": "nodemon",
     "build": "yarn run build:client && yarn run build:server"
   },
   "eslintConfig": {
