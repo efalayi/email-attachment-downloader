@@ -1,25 +1,35 @@
 {
-  "name": "email-attachment-downloader",
+  "name": "email-attachment-downloader-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/express": "^4.17.8",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "dotenv": "^8.2.0",
+    "dotenv-cli": "^4.0.0",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.6",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-scripts": "3.4.3",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "clean": "rm -rf build",
+    "start:client": "dotenv -- bash -c 'wait-on -l tcp:$API_PORT' && react-scripts start",
+    "build:client": "react-scripts build",
+    "eject:client": "react-scripts eject",
+    "test:client": "react-scripts test",
+    "build:server": "babel src/server --out-dir build/server --extensions \".ts\" --source-maps inline",
+    "start:server": "node build/server/server.js",
+    "start:dev": "nodemon",
+    "build": "yarn run build:client && yarn run build:server"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +45,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.6",
+    "wait-on": "^5.2.0"
   }
 }

@@ -1,0 +1,19 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules"
+  ],
+  "verbose": true,
+  "execMap": {
+    "ts": "node --harmony"
+  },
+  "watch": [
+    "src/server"
+  ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "ts",
+  "exec": "concurrently \"yarn run build:server\" \"wait-on -l build/server/server.js\" \"yarn run start:server\" \"yarn run start:client\""
+}
